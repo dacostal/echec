@@ -1,8 +1,104 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Fou extends Piece {
 
 	public Fou(String couleur) {
 		this.couleur = couleur;
+	}
+
+	@Override
+	public List<Case> getLegalMoves(Echiquier board, Case position) {
+		List<Case> moves = new ArrayList<>();
+
+		int ligne = position.getLigne();
+		int colonne = position.getColonne();
+		
+		
+		int i = ligne+1;
+		int j = colonne+1;
+		for (; i <8 && j<8 ; i++, j++) 
+		{
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) 
+			{
+				moves.add(c);
+			} 
+			else 
+			{
+				if(!c.getPiece().getCouleur().equals(this.couleur)) 
+				{
+					moves.add(c);
+				}
+				break;
+			}
+		}
+		
+		
+		
+		i = ligne-1;
+		j = colonne-1;
+		for (; i >=0 && j>=0 ; i--, j--) 
+		{
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) 
+			{
+				moves.add(c);
+			} 
+			else 
+			{
+				if(!c.getPiece().getCouleur().equals(this.couleur)) 
+				{
+					moves.add(c);
+				}
+				break;
+			}
+		}
+		
+		i = ligne-1;
+		j = colonne+1;
+		for (; i >=0 && j<8 ; i--, j++) 
+		{
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) 
+			{
+				moves.add(c);
+			} 
+			else 
+			{
+				if(!c.getPiece().getCouleur().equals(this.couleur)) 
+				{
+					moves.add(c);
+				}
+				break;
+			}
+		}
+		
+		i = ligne+1;
+		j = colonne-1;
+		for (; i <8 && j>=0 ; i++, j--) 
+		{
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) 
+			{
+				moves.add(c);
+			} 
+			else 
+			{
+				if(!c.getPiece().getCouleur().equals(this.couleur)) 
+				{
+					moves.add(c);
+				}
+				break;
+			}
+		}
+		return moves;
 	}
 }

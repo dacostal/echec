@@ -16,7 +16,7 @@ public class Tour extends Piece {
 		int ligne = position.getLigne();
 		int colonne = position.getColonne();
 
-		// vÃ©rification des cases en haut
+		// vérification des cases en haut
 		for (int i = ligne-1; i >= 0; i--) {
 			Case c = board.getCase(i, colonne);
 
