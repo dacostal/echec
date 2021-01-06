@@ -21,10 +21,10 @@ public class Roi extends Piece {
 			for(int j = -1; j <= 1; j++) {
 
 				// si pas la position initiale du roi
-				if(!(i == 0 && j == 0)) {
+				if(!(i == 0 && j == 0) && ligne+i >= 0 && ligne+i < 8 && colonne+j >= 0 && colonne+j < 8) {
 					Case c = board.getCase(ligne+i, colonne+j);
 
-					if(c.isEmpty()) {
+					if(c.isEmpty() || !c.getPiece().getCouleur().equals(this.couleur)) {
 						moves.add(c);
 					}
 				}

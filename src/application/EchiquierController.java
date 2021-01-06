@@ -30,11 +30,11 @@ public class EchiquierController {
 	public void move(MouseEvent e) {
 
 		// si clic sur pièce
-		if (e.getTarget() instanceof ImageView) {
+		if (e.getSource() instanceof ImageView) {
 
 			// si choix de la pièce (premier clic)
 			if (this.nbClics == 0) {
-				this.piece = (ImageView) e.getTarget();
+				this.piece = (ImageView) e.getSource();
 				this.source = (Pane) this.piece.getParent();
 
 				// si tour du joueur blanc et pièce blanche
@@ -47,7 +47,7 @@ public class EchiquierController {
 			}
 			// si choix de la destination (deuxième clic)
 			else {
-				this.destination = (Pane) ((ImageView) e.getTarget()).getParent();
+				this.destination = (Pane) ((ImageView) e.getSource()).getParent();
 
 				// si choix d'une autre pièce
 				if (isPieceAlliee()) {
@@ -55,32 +55,37 @@ public class EchiquierController {
 					this.nbClics = 0;
 					move(e);
 				}
-				// TODO si déplacement permis sur pièce adverse
-				/*else if (isLegalMove()) {
+				// si déplacement permis sur pièce adverse
+				else if (isLegalMove()) {
+					movePiece();
 					this.source.getChildren().remove(this.piece);
 					this.source.setStyle(this.style);
-					this.destination.getChildren().removeAll();
+					this.destination.getChildren().remove(this.destination.getChildren().get(0));
 					this.destination.getChildren().add(this.piece);
+
 					this.nbClics = 0;
 					this.tour++;
-				}*/
+				}
 			}
 		}
 		// si clic sur case et choix de la destination (deuxième clic)
-		else if (e.getTarget() instanceof Pane && this.nbClics == 1) {
-			this.destination = (Pane) e.getTarget();
+		else if (e.getSource() instanceof Pane && this.nbClics == 1) {
+			this.destination = (Pane) e.getSource();
 
-			// TODO si déplacement permis sur case vide (selon le type)
-			//if (isLegalMove()) {
+			// si déplacement permis sur case vide (selon le type)
+			if (isLegalMove()) {
 				movePiece();
 				this.source.getChildren().remove(this.piece);
 				this.source.setStyle(this.style);
 				this.destination.getChildren().add(this.piece);
-			//}
 
-			this.nbClics = 0;
-			this.tour++;
+				this.nbClics = 0;
+				this.tour++;
+			}
 		}
+
+		// marque l'événement comme étant consommé
+		e.consume();
 	}
 
 	/**
@@ -111,5 +116,15 @@ public class EchiquierController {
 		Case dst = this.board.getCase(GridPane.getRowIndex(this.destination), GridPane.getColumnIndex(this.destination));
 
 		this.board.movePiece(src, dst);
+	}
+
+	/**
+	 * Méthode qui indique si la la case destination appartient aux déplacements possibles.
+	 */
+	private boolean isLegalMove() {
+		Case src = this.board.getCase(GridPane.getRowIndex(this.source), GridPane.getColumnIndex(this.source));
+		Case dst = this.board.getCase(GridPane.getRowIndex(this.destination), GridPane.getColumnIndex(this.destination));
+
+		return src.getPiece().getLegalMoves(this.board, src).contains(dst);
 	}
 }

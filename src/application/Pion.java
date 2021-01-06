@@ -26,55 +26,78 @@ public class Pion extends Piece {
 		// 4 déplacements possibles
 		Case c1, c2, c3, c4;
 
-		if(this.couleur.equals("blanc")) {
-			c1 = board.getCase(ligne-1, colonne);
+		if (this.couleur.equals("blanc") && ligne - 1 >= 0) {
 
-			// si premier déplacement
-			if(this.firstMove) {
-				c2 = board.getCase(ligne-2, colonne);
+			c1 = board.getCase(ligne - 1, colonne);
 
-				if(c2.isEmpty()) {
-					moves.add(c2);
+			if (c1.isEmpty()) {
+				moves.add(c1);
+
+				// si premier déplacement
+				if (this.firstMove) {
+					c2 = board.getCase(ligne - 2, colonne);
+
+					if (c2.isEmpty()) {
+						moves.add(c2);
+					}
 				}
 			}
 
-			// diagonale gauche
-			c3 = board.getCase(ligne-1, colonne-1);
+			if (colonne - 1 >= 0) {
+				// diagonale gauche
+				c3 = board.getCase(ligne - 1, colonne - 1);
 
-			// diagonale droite
-			c4 = board.getCase(ligne-1, colonne+1);
+				// si diagonale gauche occupée par une pièce adverse
+				if (!c3.isEmpty() && !c3.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c3);
+				}
+			}
 
-		} else {
+			if (colonne + 1 < 8) {
+				// diagonale droite
+				c4 = board.getCase(ligne - 1, colonne + 1);
+
+				// si diagonale droite occupée par une pièce adverse
+				if (!c4.isEmpty() && !c4.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c4);
+				}
+			}
+
+		} else if(ligne + 1 >= 0) {
 			c1 = board.getCase(ligne+1, colonne);
 
-			// si premier déplacement
-			if(this.firstMove) {
-				c2 = board.getCase(ligne+2, colonne);
+			if(c1.isEmpty()) {
+				moves.add(c1);
 
-				if(c2.isEmpty()) {
-					moves.add(c2);
+				// si premier déplacement
+				if(this.firstMove) {
+					c2 = board.getCase(ligne+2, colonne);
+
+					if(c2.isEmpty()) {
+						moves.add(c2);
+					}
 				}
 			}
 
-			// diagonale gauche
-			c3 = board.getCase(ligne+1, colonne-1);
+			if(colonne-1 >= 0) {
+				// diagonale gauche
+				c3 = board.getCase(ligne+1, colonne-1);
 
-			// diagonale droite
-			c4 = board.getCase(ligne+1, colonne+1);
-		}
+				// si diagonale gauche occupée par une pièce adverse
+				if(!c3.isEmpty() && !c3.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c3);
+				}
+			}
 
-		if(c1.isEmpty()) {
-			moves.add(c1);
-		}
+			if(colonne+1 < 8) {
+				// diagonale droite
+				c4 = board.getCase(ligne+1, colonne+1);
 
-		// si diagonale gauche occupée par une pièce adverse
-		if(!c3.isEmpty() && !c3.getPiece().getCouleur().equals(this.couleur)) {
-			moves.add(c3);
-		}
-
-		// si diagonale droite occupée par une pièce adverse
-		if(!c4.isEmpty() && !c4.getPiece().getCouleur().equals(this.couleur)) {
-			moves.add(c4);
+				// si diagonale droite occupée par une pièce adverse
+				if(!c4.isEmpty() && !c4.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c4);
+				}
+			}
 		}
 
 		return moves;
