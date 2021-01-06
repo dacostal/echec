@@ -15,103 +15,17 @@ public class Dame extends Piece {
 
 		int ligne = position.getLigne();
 		int colonne = position.getColonne();
-		
-		
-		int i = ligne+1;
-		int j = colonne+1;
-		for (; i <8 && j<8 ; i++, j++) 
-		{
+
+		// déplacements du fou
+
+		for (int i = ligne+1, j = colonne+1; i < 8 && j < 8; i++, j++) {
 			Case c = board.getCase(i, j);
-
-			if (c.isEmpty()) 
-			{
-				moves.add(c);
-			} 
-			else 
-			{
-				if(!c.getPiece().getCouleur().equals(this.couleur)) 
-				{
-					moves.add(c);
-				}
-				break;
-			}
-		}
-		
-		
-		
-		i = ligne-1;
-		j = colonne-1;
-		for (; i >=0 && j>=0 ; i--, j--) 
-		{
-			Case c = board.getCase(i, j);
-
-			if (c.isEmpty()) 
-			{
-				moves.add(c);
-			} 
-			else 
-			{
-				if(!c.getPiece().getCouleur().equals(this.couleur)) 
-				{
-					moves.add(c);
-				}
-				break;
-			}
-		}
-		
-		i = ligne-1;
-		j = colonne+1;
-		for (; i >=0 && j<8 ; i--, j++) 
-		{
-			Case c = board.getCase(i, j);
-
-			if (c.isEmpty()) 
-			{
-				moves.add(c);
-			} 
-			else 
-			{
-				if(!c.getPiece().getCouleur().equals(this.couleur)) 
-				{
-					moves.add(c);
-				}
-				break;
-			}
-		}
-		
-		i = ligne+1;
-		j = colonne-1;
-		for (; i <8 && j>=0 ; i++, j--) 
-		{
-			Case c = board.getCase(i, j);
-
-			if (c.isEmpty()) 
-			{
-				moves.add(c);
-			} 
-			else 
-			{
-				if(!c.getPiece().getCouleur().equals(this.couleur)) 
-				{
-					moves.add(c);
-				}
-				break;
-			}
-		}
-		List<Case> moves = new ArrayList<>();
-
-		int ligne = position.getLigne();
-		int colonne = position.getColonne();
-
-		// v�rification des cases en haut
-		for ( i = ligne-1; i >= 0; i--) {
-			Case c = board.getCase(i, colonne);
 
 			if (c.isEmpty()) {
 				moves.add(c);
 			} else {
 
-				if(!c.getPiece().getCouleur().equals(this.couleur)) {
+				if (!c.getPiece().getCouleur().equals(this.couleur)) {
 					moves.add(c);
 				}
 
@@ -119,8 +33,54 @@ public class Dame extends Piece {
 			}
 		}
 
-		// vérification des cases en bas
-		for ( i = ligne+1; i < 8; i++) {
+		for (int i = ligne-1, j = colonne-1; i >= 0 && j >= 0; i--, j--) {
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) {
+				moves.add(c);
+			} else {
+
+				if (!c.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c);
+				}
+
+				break;
+			}
+		}
+
+		for (int i = ligne-1, j = colonne+1; i >= 0 && j < 8; i--, j++) {
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) {
+				moves.add(c);
+			} else {
+
+				if (!c.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c);
+				}
+
+				break;
+			}
+		}
+
+		for (int i = ligne+1, j = colonne-1; i < 8 && j >= 0; i++, j--) {
+			Case c = board.getCase(i, j);
+
+			if (c.isEmpty()) {
+				moves.add(c);
+			} else {
+
+				if (!c.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c);
+				}
+
+				break;
+			}
+		}
+
+		// déplacements de la tour
+
+		for (int i = ligne-1; i >= 0; i--) {
 			Case c = board.getCase(i, colonne);
 
 			if (c.isEmpty()) {
@@ -135,15 +95,14 @@ public class Dame extends Piece {
 			}
 		}
 
-		// vérification des cases à gauche
-		for ( j = colonne-1; j >= 0; j--) {
-			Case c = board.getCase(ligne, j);
+		for (int i = ligne+1; i < 8; i++) {
+			Case c = board.getCase(i, colonne);
 
 			if (c.isEmpty()) {
 				moves.add(c);
 			} else {
 
-				if(!c.getPiece().getCouleur().equals(this.couleur)) {
+				if (!c.getPiece().getCouleur().equals(this.couleur)) {
 					moves.add(c);
 				}
 
@@ -151,8 +110,22 @@ public class Dame extends Piece {
 			}
 		}
 
-		// vérification des cases à droite
-		for (j = colonne+1; j < 8; j++) {
+		for (int j = colonne-1; j >= 0; j--) {
+			Case c = board.getCase(ligne, j);
+
+			if (c.isEmpty()) {
+				moves.add(c);
+			} else {
+
+				if (!c.getPiece().getCouleur().equals(this.couleur)) {
+					moves.add(c);
+				}
+
+				break;
+			}
+		}
+
+		for (int j = colonne+1; j < 8; j++) {
 			Case c = board.getCase(ligne, j);
 
 			if (c.isEmpty()) {

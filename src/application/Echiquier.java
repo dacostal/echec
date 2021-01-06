@@ -51,7 +51,13 @@ public class Echiquier {
 	}
 
 	public void movePiece(Case depart, Case arrivee) {
-		arrivee.addPiece(depart.getPiece());
+		Piece p = depart.getPiece();
+
+		if(p instanceof Pion) {
+			((Pion) p).setFirstMove(false);
+		}
+
+		arrivee.addPiece(p);
 		depart.removePiece();
 	}
 }
