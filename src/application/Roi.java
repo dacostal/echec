@@ -5,8 +5,19 @@ import java.util.List;
 
 public class Roi extends Piece {
 
+	private boolean firstMove;
+
 	public Roi(String couleur) {
 		this.couleur = couleur;
+		this.firstMove = true;
+	}
+
+	public boolean getFirstMove() {
+		return this.firstMove;
+	}
+
+	public void setFirstMove(boolean b) {
+		this.firstMove = b;
 	}
 
 	@Override
@@ -30,10 +41,6 @@ public class Roi extends Piece {
 				}
 			}
 		}
-
-		// TODO technique du "roque"
-
-		// TODO menace "échecs aux Roi"
 
 		return moves;
 	}

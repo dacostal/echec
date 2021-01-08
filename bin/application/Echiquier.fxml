@@ -10,7 +10,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EchiquierController">
 	<center>
-		<GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
+		<GridPane fx:id="grid" gridLinesVisible="true" BorderPane.alignment="CENTER">
 			<columnConstraints>
 				<ColumnConstraints prefWidth="80.0" />
 				<ColumnConstraints prefWidth="80.0" />
@@ -62,22 +62,22 @@
 					</children>
 				</Pane>
 				<Pane onMousePressed="#move" style="-fx-background-color: #ac8053;" GridPane.columnIndex="3" GridPane.rowIndex="0">
-					<children>
-						<ImageView fitHeight="80.0" fitWidth="80.0" onMousePressed="#move" pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/RN.png" />
-							</image>
-						</ImageView>
-					</children>
-				</Pane>
-				<Pane onMousePressed="#move" style="-fx-background-color: #e4ccb4;" GridPane.columnIndex="4" GridPane.rowIndex="0">
-					<children>
+               <children>
 						<ImageView fitHeight="80.0" fitWidth="80.0" onMousePressed="#move" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../images/DN.png" />
 							</image>
 						</ImageView>
-					</children>
+               </children>
+				</Pane>
+				<Pane onMousePressed="#move" style="-fx-background-color: #e4ccb4;" GridPane.columnIndex="4" GridPane.rowIndex="0">
+               <children>
+						<ImageView fitHeight="80.0" fitWidth="80.0" onMousePressed="#move" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../images/RN.png" />
+							</image>
+						</ImageView>
+               </children>
 				</Pane>
 				<Pane onMousePressed="#move" style="-fx-background-color: #ac8053;" GridPane.columnIndex="5" GridPane.rowIndex="0">
 					<children>
@@ -317,22 +317,22 @@
 					</children>
 				</Pane>
 				<Pane onMousePressed="#move" style="-fx-background-color: #e4ccb4;" GridPane.columnIndex="3" GridPane.rowIndex="7">
-					<children>
-						<ImageView fitHeight="80.0" fitWidth="80.0" onMousePressed="#move" pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/RB.png" />
-							</image>
-						</ImageView>
-					</children>
-				</Pane>
-				<Pane onMousePressed="#move" style="-fx-background-color: #ac8053;" GridPane.columnIndex="4" GridPane.rowIndex="7">
-					<children>
+               <children>
 						<ImageView fitHeight="80.0" fitWidth="80.0" onMousePressed="#move" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../images/DB.png" />
 							</image>
 						</ImageView>
-					</children>
+               </children>
+				</Pane>
+				<Pane onMousePressed="#move" style="-fx-background-color: #ac8053;" GridPane.columnIndex="4" GridPane.rowIndex="7">
+               <children>
+						<ImageView fitHeight="80.0" fitWidth="80.0" onMousePressed="#move" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../images/RB.png" />
+							</image>
+						</ImageView>
+               </children>
 				</Pane>
 				<Pane onMousePressed="#move" style="-fx-background-color: #e4ccb4;" GridPane.columnIndex="5" GridPane.rowIndex="7">
 					<children>

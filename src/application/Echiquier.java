@@ -19,8 +19,8 @@ public class Echiquier {
 		this.cases[0][0].addPiece(new Tour(NOIR));
 		this.cases[0][1].addPiece(new Cavalier(NOIR));
 		this.cases[0][2].addPiece(new Fou(NOIR));
-		this.cases[0][3].addPiece(new Roi(NOIR));
-		this.cases[0][4].addPiece(new Dame(NOIR));
+		this.cases[0][3].addPiece(new Dame(NOIR));
+		this.cases[0][4].addPiece(new Roi(NOIR));
 		this.cases[0][5].addPiece(new Fou(NOIR));
 		this.cases[0][6].addPiece(new Cavalier(NOIR));
 		this.cases[0][7].addPiece(new Tour(NOIR));
@@ -39,8 +39,8 @@ public class Echiquier {
 		this.cases[7][0].addPiece(new Tour(BLANC));
 		this.cases[7][1].addPiece(new Cavalier(BLANC));
 		this.cases[7][2].addPiece(new Fou(BLANC));
-		this.cases[7][3].addPiece(new Roi(BLANC));
-		this.cases[7][4].addPiece(new Dame(BLANC));
+		this.cases[7][3].addPiece(new Dame(BLANC));
+		this.cases[7][4].addPiece(new Roi(BLANC));
 		this.cases[7][5].addPiece(new Fou(BLANC));
 		this.cases[7][6].addPiece(new Cavalier(BLANC));
 		this.cases[7][7].addPiece(new Tour(BLANC));
@@ -55,6 +55,10 @@ public class Echiquier {
 
 		if(p instanceof Pion) {
 			((Pion) p).setFirstMove(false);
+		} else if(p instanceof Tour) {
+			((Tour) p).setFirstMove(false);
+		} else if(p instanceof Roi) {
+			((Roi) p).setFirstMove(false);
 		}
 
 		arrivee.addPiece(p);

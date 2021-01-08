@@ -5,8 +5,19 @@ import java.util.List;
 
 public class Tour extends Piece {
 
+	private boolean firstMove;
+
 	public Tour(String couleur) {
 		this.couleur = couleur;
+		this.firstMove = true;
+	}
+
+	public boolean getFirstMove() {
+		return this.firstMove;
+	}
+
+	public void setFirstMove(boolean b) {
+		this.firstMove = b;
 	}
 
 	@Override

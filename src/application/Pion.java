@@ -12,6 +12,10 @@ public class Pion extends Piece {
 		this.firstMove = true;
 	}
 
+	public boolean getFirstMove() {
+		return this.firstMove;
+	}
+
 	public void setFirstMove(boolean b) {
 		this.firstMove = b;
 	}
