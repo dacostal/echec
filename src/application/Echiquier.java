@@ -5,6 +5,7 @@ public class Echiquier {
 	private static final String NOIR = "noir";
 	private static final String BLANC = "blanc";
 	private Case[][] cases = new Case[8][8];
+	private Case posRB, posRN;
 
 	public Echiquier() {
 
@@ -44,10 +45,22 @@ public class Echiquier {
 		this.cases[7][5].addPiece(new Fou(BLANC));
 		this.cases[7][6].addPiece(new Cavalier(BLANC));
 		this.cases[7][7].addPiece(new Tour(BLANC));
+
+		// positions des rois
+		this.posRB = this.cases[7][4];
+		this.posRN = this.cases[0][4];
 	}
 
 	public Case getCase(int ligne, int colonne) {
 		return this.cases[ligne][colonne];
+	}
+
+	public Case getCaseRB() {
+		return this.posRB;
+	}
+
+	public Case getCaseRN() {
+		return this.posRN;
 	}
 
 	public void movePiece(Case depart, Case arrivee) {
@@ -59,6 +72,12 @@ public class Echiquier {
 			((Tour) p).setFirstMove(false);
 		} else if(p instanceof Roi) {
 			((Roi) p).setFirstMove(false);
+
+			if(p.getCouleur().equals(BLANC)) {
+				this.posRB = arrivee;
+			} else {
+				this.posRN = arrivee;
+			}
 		}
 
 		arrivee.addPiece(p);

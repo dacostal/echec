@@ -1,5 +1,7 @@
 package application;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -280,7 +282,7 @@ public class EchiquierController {
 				Pane advPane = getPaneByRowColumnIndex(i, j);
 
 				if(!advCase.isEmpty() && !isPieceAlliee(srcPane, advPane) 
-					&& advCase.getPiece().getLegalMoves(board, advCase).contains(srcCase)) {
+					&& advCase.getPiece().getLegalMoves(this.board, advCase).contains(srcCase)) {
 
 					return true;
 				}
@@ -288,5 +290,26 @@ public class EchiquierController {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Méthode qui indique s'il y a échecs et mat.
+	 */
+	private boolean isEchecsEtMat(Case roi) {
+
+		if(!isEchecsAuRoi(roi)) {
+			return false;
+		}
+
+		int nbEchecsAuRoi = 0;
+		List<Case> moves = roi.getPiece().getLegalMoves(this.board, roi);
+
+		for(Case c : moves) {
+			if(isEchecsAuRoi(c)) {
+				nbEchecsAuRoi++;
+			}
+		}
+
+		return nbEchecsAuRoi == moves.size();
 	}
 }
