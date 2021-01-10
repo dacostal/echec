@@ -109,12 +109,12 @@ public class EchiquierController {
 			Case roi;
 			String etat;
 
-			if(this.tour % 2 == 0) {
+			if(this.tour % 2 != 0) {
 				roi = this.board.getCaseRB();
-				etat = "Joueur blanc gagne !";
+				etat = "Joueur noir gagne !";
 			} else {
 				roi = this.board.getCaseRN();
-				etat = "Joueur noir gagne !";
+				etat = "Joueur blanc gagne !";
 			}
 
 			if(isEchecsEtMat(roi)) {
