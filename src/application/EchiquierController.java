@@ -117,11 +117,13 @@ public class EchiquierController {
 				etat = "Joueur noir gagne !";
 			}
 
-			// si échecs et mat
 			if(isEchecsEtMat(roi)) {
 				end(etat);
 			}
 		}
+
+		// réinitialise le déplacement à false
+		this.isMove = false;
 
 		// marque l'événement comme étant consommé
 		e.consume();
@@ -254,7 +256,7 @@ public class EchiquierController {
 			if(dst.getColonne() == 7) {
 				for(int j = src.getColonne()+1; j < dst.getColonne(); j++) {
 					if((src.getPiece().getCouleur().equals("blanc") && !this.board.getCase(7, j).isEmpty()) 
-						|| !this.board.getCase(0, j).isEmpty()) {
+						|| (src.getPiece().getCouleur().equals("noir") && !this.board.getCase(0, j).isEmpty())) {
 
 						return false;
 					}
@@ -273,7 +275,7 @@ public class EchiquierController {
 			} else {
 				for(int j = src.getColonne()-1; j > dst.getColonne(); j--) {
 					if((src.getPiece().getCouleur().equals("blanc") && !this.board.getCase(7, j).isEmpty()) 
-						|| !this.board.getCase(0, j).isEmpty()) {
+						|| (src.getPiece().getCouleur().equals("noir") && !this.board.getCase(0, j).isEmpty())) {
 
 						return false;
 					}
@@ -296,7 +298,7 @@ public class EchiquierController {
 			if(src.getColonne() == 0) {
 				for(int j = src.getColonne()+1; j < dst.getColonne(); j++) {
 					if((src.getPiece().getCouleur().equals("blanc") && !this.board.getCase(7, j).isEmpty()) 
-						|| !this.board.getCase(0, j).isEmpty()) {
+						|| (src.getPiece().getCouleur().equals("noir") && !this.board.getCase(0, j).isEmpty())) {
 
 						return false;
 					}
@@ -315,7 +317,7 @@ public class EchiquierController {
 			} else {
 				for(int j = src.getColonne()-1; j > dst.getColonne(); j--) {
 					if((src.getPiece().getCouleur().equals("blanc") && !this.board.getCase(7, j).isEmpty()) 
-						|| !this.board.getCase(0, j).isEmpty()) {
+						|| (src.getPiece().getCouleur().equals("noir") && !this.board.getCase(0, j).isEmpty())) {
 
 						return false;
 					}
