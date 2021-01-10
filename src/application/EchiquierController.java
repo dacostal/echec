@@ -2,6 +2,7 @@ package application;
 
 import java.util.List;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -126,6 +127,43 @@ public class EchiquierController {
 		e.consume();
 	}
 
+	@FXML
+	public void giveUp(ActionEvent event) {
+		// si joueur blanc abandonne
+		if(this.tour % 2 == 0) {
+			end("Joueur noir gagne !");
+
+		// si joueur noir abandonne
+		} else {
+			end("Joueur blanc gagne !");
+		}
+	}
+
+	@FXML
+	public void menu(ActionEvent event) {
+		try {
+			// récupération du menu
+			Parent newroot = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+
+			// création de la nouvelle interface
+			Scene scene = new Scene(newroot);
+
+			// fermeture de l'ancienne fenêtre
+			Stage oldStage = (Stage) this.grid.getParent().getScene().getWindow();
+			oldStage.close();
+
+			// création de la nouvelle fenêtre
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("Echecs");
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Méthode qui affiche la fenêtre de fin de partie.
 	 */
@@ -147,7 +185,7 @@ public class EchiquierController {
 			Scene scene = new Scene(newroot);
 
 			// fermeture de l'ancienne fenêtre
-			Stage oldStage = (Stage) grid.getParent().getScene().getWindow();
+			Stage oldStage = (Stage) this.grid.getParent().getScene().getWindow();
 			oldStage.close();
 
 			// création de la nouvelle fenêtre
