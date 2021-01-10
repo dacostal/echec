@@ -370,7 +370,7 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Partie">
+          <Menu mnemonicParsing="false" text="Options">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#giveUp" text="Abandonner" />
                   <MenuItem mnemonicParsing="false" onAction="#menu" text="Quitter" />
