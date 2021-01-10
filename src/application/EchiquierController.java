@@ -374,15 +374,15 @@ public class EchiquierController {
 	/**
 	 * Méthode qui indique s'il y a échecs au Roi.
 	 */
-	private boolean isEchecsAuRoi(Case srcCase) {
-		Pane srcPane = getPaneByRowColumnIndex(srcCase.getLigne(), srcCase.getColonne());
+	private boolean isEchecsAuRoi(Case roi, Case srcCase) {
+		Pane roiPane = getPaneByRowColumnIndex(roi.getLigne(), roi.getColonne());
 
 		for(int i = 0; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
 				Case advCase = this.board.getCase(i, j);
 				Pane advPane = getPaneByRowColumnIndex(i, j);
 
-				if(!advCase.isEmpty() && !isPieceAlliee(srcPane, advPane) 
+				if(!advCase.isEmpty() && !isPieceAlliee(roiPane, advPane) 
 					&& advCase.getPiece().getLegalMoves(this.board, advCase).contains(srcCase)) {
 
 					return true;
@@ -398,7 +398,7 @@ public class EchiquierController {
 	 */
 	private boolean isEchecsEtMat(Case roi) {
 
-		if(!isEchecsAuRoi(roi)) {
+		if(!isEchecsAuRoi(roi, roi)) {
 			return false;
 		}
 
@@ -406,7 +406,7 @@ public class EchiquierController {
 		List<Case> moves = roi.getPiece().getLegalMoves(this.board, roi);
 
 		for(Case c : moves) {
-			if(isEchecsAuRoi(c)) {
+			if(isEchecsAuRoi(roi, c)) {
 				nbEchecsAuRoi++;
 			}
 		}
