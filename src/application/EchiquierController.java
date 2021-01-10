@@ -3,17 +3,22 @@ package application;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class EchiquierController {
 
 	private Echiquier board;
 	private int tour = 0;
 	private int nbClics = 0;
+	private boolean isMove;
 	private String style;
 
 	@FXML
@@ -59,6 +64,7 @@ public class EchiquierController {
 				if(isPieceAlliee(this.source, this.destination) && isRoque(this.source, this.destination)) {
 					this.nbClics = 0;
 					this.tour++;
+					this.isMove = true;
 				}
 				// si choix d'une autre pièce
 				else if (isPieceAlliee(this.source, this.destination)) {
@@ -76,6 +82,7 @@ public class EchiquierController {
 
 					this.nbClics = 0;
 					this.tour++;
+					this.isMove = true;
 				}
 			}
 		}
@@ -92,11 +99,67 @@ public class EchiquierController {
 
 				this.nbClics = 0;
 				this.tour++;
+				this.isMove = true;
+			}
+		}
+
+		// si un déplacement a eu lieu
+		if(this.isMove) {
+			Case roi;
+			String etat;
+
+			if(this.tour % 2 == 0) {
+				roi = this.board.getCaseRB();
+				etat = "Joueur blanc gagne !";
+			} else {
+				roi = this.board.getCaseRN();
+				etat = "Joueur noir gagne !";
+			}
+
+			// si échecs et mat
+			if(isEchecsEtMat(roi)) {
+				end(etat);
 			}
 		}
 
 		// marque l'événement comme étant consommé
 		e.consume();
+	}
+
+	/**
+	 * Méthode qui affiche la fenêtre de fin de partie.
+	 */
+	private void end(String etat) {
+		try {
+			// création d'un fxml loader
+			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("FinDePartie.fxml"));
+
+			// récupération de la racine
+			Parent newroot = fxmlloader.load();
+
+			// récupérer le controller du fxml
+			FinDePartieController controller = fxmlloader.getController();
+
+			// passer le joueur gagnant au controller
+			controller.setData(etat);
+
+			// création de la nouvelle interface
+			Scene scene = new Scene(newroot);
+
+			// fermeture de l'ancienne fenêtre
+			Stage oldStage = (Stage) grid.getParent().getScene().getWindow();
+			oldStage.close();
+
+			// création de la nouvelle fenêtre
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("Echecs");
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
